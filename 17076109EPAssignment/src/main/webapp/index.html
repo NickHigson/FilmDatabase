@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Enterprise Programming Assignment</title>
+
+<script src="./scripts/jquery.js"></script>
+<script src="./scripts/jquery-ui.js"></script>
+<script src="./scripts/jquery-index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="d-block p-2 bg-primary text-black">
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="format1" value="json">
+  <label class="form-check-label" for="inlineRadio1">JSON</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="format2" value="xml">
+  <label class="form-check-label" for="inlineRadio2">XML</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="format3" value="text">
+  <label class="form-check-label" for="inlineRadio3">Text</label>
+</div>
+
+<form action="#">
+  <input type="button" value="Get All Films" onclick='getAllFilms()'/>
+</form>
+ 
+ <BR>
+ 
+<form action="#">
+  <label>Film:</label>
+  <input type="text" id="film" placeholder="Enter Film"/>
+  <input type="button" value="Search" onclick='getFilmByTitle()'/>
+</form>
+
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal">Update a Film by ID</button>
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#insertModal" data-whatever="Update a Film">Insert a Film</button>
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deleteModal" data-whatever="Delete a Film">Delete a Film</button>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update Film</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="id" class="col-form-label">Film ID</label>
+            <input type="text" name="id" class="form-control" id="id" required>
+          </div>
+          <div class="form-group">
+            <label for="title" class="col-form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="title" required>
+          </div>
+            <div class="form-group">
+            <label for="year" class="col-form-label">Year</label>
+            <input type="text" name="year" class="form-control" id="year" required>
+          </div>
+          <div class="form-group">
+            <label for="director" class="col-form-label">Director</label>
+            <input type="text" name="director" class="form-control" id="director" required>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Stars</label>
+            <input type="text" name="stars" class="form-control" id="stars" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Review</label>
+            <input type="text" name="review" class="form-control" id="review" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" onclick='updateFilm("id", "title", "year", "director", "stars", "review")' class="btn btn-primary">Update</button>
+      </div>
+
+      <div class="p-3 mb-2 bg-secondary text-white"  id="result-update-modal"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="insertModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="insertModalLabel">Insert Film</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="title" class="col-form-label">Title</label>
+            <input type="text" name="title" class="form-control" id="titleInsert" required>
+          </div>
+            <div class="form-group">
+            <label for="year" class="col-form-label">Year</label>
+            <input type="text" name="year" class="form-control" id="yearInsert" required>
+          </div>
+          <div class="form-group">
+            <label for="director" class="col-form-label">Director</label>
+            <input type="text" name="director" class="form-control" id="directorInsert" required>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Stars</label>
+            <input type="text" name="stars" class="form-control" id="starsInsert" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Review</label>
+            <input type="text" name="review" class="form-control" id="reviewInsert" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" onclick='insertFilm("titleInsert", "yearInsert", "directorInsert", "starsInsert", "reviewInsert")' class="btn btn-primary">Insert</button>
+      </div>
+
+      <div class="p-3 mb-2 bg-secondary text-white"  id="result-insert-modal"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Film by ID</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="id" class="col-form-label">Film ID</label>
+            <input type="text" name="id" class="form-control" id="idDelete" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" onclick='deleteFilm("id")' class="btn btn-primary">Update</button>
+      </div>
+
+      <div class="p-3 mb-2 bg-secondary text-white"  id="result-delete-modal"></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="p-3 mb-2 bg-secondary text-white" id="result-area"><h2>Results</h2></div>
+
+</body>
+</html>

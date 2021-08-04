@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <servlet>
+  <servlet-name>Get All Servlet</servlet-name>
+  <servlet-class>Controllers.getAllServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>Get Film Servlet</servlet-name>
+  <servlet-class>Controllers.getFilmServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>Update Film Servlet</servlet-name>
+  <servlet-class>Controllers.updateFilmServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>Get Film by ID Servlet</servlet-name>
+  <servlet-class>Controllers.getFilmIDServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>Insert Film Servlet</servlet-name>
+  <servlet-class>Controllers.insertFilmServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>Delete Film Servlet</servlet-name>
+  <servlet-class>Controllers.deleteFilmServlet</servlet-class>
+ </servlet>
+ 
+ <servlet-mapping>
+  <servlet-name>Get All Servlet</servlet-name>
+  <url-pattern>/show-all-films</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Get Film Servlet</servlet-name>
+  <url-pattern>/show-film</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Get Film by ID Servlet</servlet-name>
+  <url-pattern>/show-filmID</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Update Film Servlet</servlet-name>
+  <url-pattern>/update-film</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Insert Film Servlet</servlet-name>
+  <url-pattern>/insert-film</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Delete Film Servlet</servlet-name>
+  <url-pattern>/delete-film</url-pattern>
+ </servlet-mapping>
+ 
+ <welcome-file-list>
+  <welcome-file>index.html</welcome-file>
+ </welcome-file-list>
+</web-app>
